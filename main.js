@@ -23,9 +23,9 @@ function renderProductList (productMap) {
     // 判斷賣完沒,使用三元運算子設定加入購物車btn的class跟文字
     const soldOut = product.inventory === 0;
     rawHTML += `
-    <div class="card col-3">
+    <div class="card col-2 m-1">
     <img src="${product.imgUrl
-    }" class="card-img-top" alt="product-photo">
+    }" class="card-img-top img-fluid" alt="product-photo">
     <div class="card-body">
       <p class="card-title">${product.name}</p>
       <p class="card-text">${product.price}</p>
@@ -95,21 +95,26 @@ container.addEventListener('click', (event) => {
   //清空購物車
   if (event.target.classList.contains('btn-reset-cart')) {
     Object.values(cartItems).forEach(item => {
+      //這裡cartItem直接forEach就好. 因為他是陣列
       productMap[item.productId].inventory += item.qty
     }) 
     cartItems = []
-    cartList.innerHTML = ''
-    totalAmount.textContent = '--'
+    //cartList.innerHTML = ''  
+    //因為已經cartItem =[]  直接用rendercartList(carItems)就好. 還可以檢查資料庫是否真的清空. 
     renderProductList(productMap)
+    rendercartList(cartItems)
+    totalAmount.textContent = '--'
   }
 
 //結帳
 if (event.target.classList.contains('btn-submit')) {
   alert(`結帳金額為 ${cartAmount}`)
   cartItems = []
-  cartList.innerHTML = ''
-  totalAmount.textContent = '--'
+  //cartList.innerHTML = ''
+  //跟清空購物車一樣
   renderProductList(productMap)
+  rendercartList(cartItems)
+  totalAmount.textContent = '--'
 }
 
   //從購物車中移除
@@ -129,5 +134,5 @@ if (event.target.classList.contains('btn-submit')) {
 
 //Q1. 事件監聽器的放法 -> 業界是習慣用querySelectorAll(). 還是用delegate的.  我個人是覺得用delegate的然後比對id或是class比較好. 但是你這樣的話. 就全部寫在一起了. 也可以拆開啦
 
-// 物件. productMap用 中括號 [] =  來塞入物件
+// 物件. productMap[key] =  來塞入物件
 // 要加入預設
