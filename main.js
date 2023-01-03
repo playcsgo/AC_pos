@@ -60,7 +60,7 @@ axios.get(prodcut_URL).then(res => {
     productMap[product.id] = product
   })
   renderProductList(productMap)
-  //為什麼一定要放axios裡面, 因為你放外面. 執行到的時候, AJAS還沒有把資料抓取完. 資料會是空的
+  //為什麼一定要放axios裡面: 因為你放外面. 執行到的時候, AJAS還沒有把資料抓取完. 資料會是空的
 })
 
 //監聽器  
@@ -69,6 +69,9 @@ axios.get(prodcut_URL).then(res => {
 //原因是因為這次只有兩組監聽器要安裝. 這樣程式碼寫起來比較簡潔
 // 幹  不覺得...
 container.addEventListener('click', (event) => {
+  //避免向上捲動
+  event.preventDefault()
+
   //加入購物車
   if (event.target.classList.contains('add-to-cart')) {
     let productId = event.target.dataset.id
@@ -114,9 +117,11 @@ if (event.target.classList.contains('btn-submit')) {
     let productId = event.target.dataset.id
     let cartItemIndex = cartItems.findIndex(cartItem => cartItem.productId === productId)
     cartItems[cartItemIndex].qty -= 1
+    productMap[productId].inventory ++
     if (cartItems[cartItemIndex].qty <= 0) {
         cartItems.splice(cartItemIndex, 1)
         }
+    renderProductList(productMap)
     rendercartList(cartItems)
   }
 })
