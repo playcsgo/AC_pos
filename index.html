@@ -4,47 +4,46 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POS機 3.0</title>
-  <!-- css for bootstrap -->
+  <title>POS機練習</title>
+  <!-- css from bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="container">
-    <h3 class="title">POS機 3.0</h3>
+  <div class="contain p-2" id="data-panel">
+    <h5>POS機練習</h5>
     <div class="row" id="product-list">
-      <!-- By Btootstrap and render by JS -->
-      <div class="card col-3">
-        <img src="https://images.unsplash.com/photo-1558024920-b41e1887dc32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="product-photo">
+      <!-- bootstrap card model render by js -->
+      <div class="card col-2 m-1">
+        <img src="https://images.unsplash.com/photo-1558024920-b41e1887dc32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" class="card-img-top img-fluid rounded" alt="product-photo">
         <div class="card-body">
-          <p class="card-title">馬卡龍</p>
-          <p class="card-text">90</p>
+          <h5 class="card-title">卡馬龍</h5>
+          <p class="card-text">90 </p>
+          <p class="card-text">剩餘10個</p>
           <a href="#" class="btn btn-primary">加入購物車</a>
         </div>
       </div>
     </div>
     <div class="cart">
-      <div class="cart-list">已購賣清單</div>
-      <div class="col-6">
-        <ul id="cart-list" class="list-group">
-          <!-- render by JS -->
-          <!-- <li class="list-group-item">卡馬龍 x 1 小記:90</li>
-          <li class="list-group-item">草莓 x 2 小記:120</li> -->
+      <h4>已購買清單</h4>
+        <ul class="list-group" id="cart-list">
+          <!-- <li class="list-group-item">奶茶 x 2 小記:200</li>
+          <li class="list-group-item">卡馬龍 x 2 小記:180</li> -->
         </ul>
+      <div>
+        <h4 class="m-3">總金額: <span id="total-amount">0</span>元</h4>
       </div>
-      <div class="sum my-3">總金額: <span id="total-amount"> --</span></div>
     </div>
-    <div class="row cart d-flex justify-content-between m-3">
-      <button type="button" class="col-1 btn btn-primary btn-reset-cart ms-3">清空購物車</button>
-      <button type="button" class="col-1 btn btn-danger btn-submit me-5">結帳</button>
+    <div class="submit m-3">
+      <button class="btn btn-primary btn-removeAllCart me-5">清空購物車</button>
+      <button class="btn btn-danger btn-submit-cart ms-5">結帳</button>
     </div>
-    
-
   </div>
-
-  <!-- js套件 -->
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  
+  <!-- script from axios -->
+  <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+  <!-- script for main -->
   <script src="main.js"></script>
+  <!-- script from bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
