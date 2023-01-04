@@ -71,45 +71,57 @@ const controller = {
       const cartItemIndex = model.cartItems.findIndex(item => item.productId === productId)
        //2-1 加入購物車
       if (classCheck.contains('btn-add-to-cart')) {
-        if (model.cartItems.some(item => item.productId === productId)) {
-          model.cartItems[cartItemIndex].qty ++
-        } else {
-          model.cartItems.push({productId, qty: 1})
-        }
-        model.productMap[productId].inventory --
-        view.renderProductLsit(model.productMap)
-        view.rendercartList(model.cartItems)
+        this.addToCart(productId, cartItemIndex)
       }
       //2-2 從購物車中移除  
       if (classCheck.contains('btn-remove')) {
-        model.cartItems[cartItemIndex].qty --
-        model.productMap[productId].inventory ++
-        if (model.cartItems[cartItemIndex].qty === 0) {
-          model.cartItems.splice(cartItemIndex, 1)
-        }
-        view.renderProductLsit(model.productMap)
-        view.rendercartList(model.cartItems)
+        this.removeFromCart(productId, cartItemIndex)
       }
       //2-3 清空購物車 (數量會補回inventory)
       if (classCheck.contains('btn-removeAllCart')) {
-        model.cartItems.forEach(item => {
-        model.productMap[item.productId].inventory += item.qty
-        })
-        model.cartItems = []
-        view.renderProductLsit(model.productMap)
-        view.rendercartList(model.cartItems)
+        this.removeAllCart(productId)
       }
       //2-4 結帳 (產品售出, 不會回填inventory)
       if (classCheck.contains('btn-submit-cart')) {
-        if (model.cartItems.length > 0) {
-          alert(`結帳金額${model.cartAmount}`)
-          model.cartAmount = 0
-          model.cartItems = []
-          view.rendercartList(model.cartItems)
-        }
+        this.cartCheck()
       }
     })
-  }
+  },
+  addToCart(productId, cartItemIndex) {
+    if (model.cartItems.some(item => item.productId === productId)) {
+      model.cartItems[cartItemIndex].qty ++
+    } else {
+      model.cartItems.push({productId, qty: 1})
+    }
+    model.productMap[productId].inventory --
+    view.renderProductLsit(model.productMap)
+    view.rendercartList(model.cartItems)
+  },
+  removeFromCart(productId, cartItemIndex) {
+    model.cartItems[cartItemIndex].qty --
+    model.productMap[productId].inventory ++
+    if (model.cartItems[cartItemIndex].qty === 0) {
+      model.cartItems.splice(cartItemIndex, 1)
+      }
+    view.renderProductLsit(model.productMap)
+    view.rendercartList(model.cartItems)
+  },
+  removeAllCart(productId) {
+    model.cartItems.forEach(item => {
+      model.productMap[item.productId].inventory += item.qty
+    })
+    model.cartItems = []
+    view.renderProductLsit(model.productMap)
+    view.rendercartList(model.cartItems)
+  },
+  cartCheck() {
+    if (model.cartItems.length > 0) {
+      alert(`結帳金額${model.cartAmount}`)
+      model.cartAmount = 0
+      model.cartItems = []
+      view.rendercartList(model.cartItems)
+    }
+  },
 }
 
 // main code 主程式
