@@ -35,7 +35,7 @@ const view = {
         <div class="card-body">
           <h5 class="card-title">${product.name}</h5>
           <p class="card-text">${product.price} $</p>
-          <p class="card-text">剩下${product.inventory}</p>
+          <p class="card-text">剩下${product.inventory}份</p>
           <a href="#" class="btn btn-primary btn-add-to-cart ${soldOut ? "disabled" : ''}" data-id="${product.id}">${soldOut ? '已售完' :"加入購物車"}</a>
         </div>
       </div>
@@ -65,6 +65,7 @@ const view = {
 const controller = {
   setEventListener(){
     dataPanel.addEventListener('click', event => {
+      event.preventDefault()
       const classCheck = event.target.classList
       const productId = event.target.dataset.id
       const cartItemIndex = model.cartItems.findIndex(item => item.productId === productId)
