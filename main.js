@@ -124,8 +124,6 @@ const controller = {
   },
 }
 
-// main code 主程式
-// AJAS for API data (這裡用的是axios)
-// eventListener
+// main code  主程式: AJAS & eventListeners
 model.getData(BASIC_URL)
 controller.setEventListener()
